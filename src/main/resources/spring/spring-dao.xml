@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+        
+        <!-- 配置整合mybatis过程 -->
+        <!-- 1：配置数据库相关参数properties的属性：${url} -->
+        <context:property-placeholder location="classpath:jdbc.properties"/>
+        
+        <!-- 2.配置dbcp数据库连接池 -->       
+        <!--配置数据源，这里使用Spring默认-->
+	    <bean id="sqlServerDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+			<property name="driverClassName" value="${jdbc.sqlserver.driver}"/>
+	        <property name="url" value="${jdbc.sqlserver.url}"/>
+	        <property name="username" value="${jdbc.sqlserver.username}"/>
+	        <property name="password" value="${jdbc.sqlserver.password}"/>
+	        <!-- 配置连接池私有属性 -->
+	        <property name="initialSize" value="${jdbc.initialSize}"/>
+	        <property name="minIdle" value="${jdbc.minIdle}"/>
+	        <property name="maxIdle" value="${jdbc.maxIdle}"/>
+	        <property name="maxActive" value="${jdbc.maxActive}"/>
+	        <property name="maxWait" value="${jdbc.maxWait}"/>
+			<!-- 关闭连接后不自动commit，默认false -->
+	        <property name="defaultAutoCommit" value="${jdbc.defaultAutoCommit}"/>
+	        <property name="removeAbandoned" value="${jdbc.removeAbandoned}"/>
+			<!-- 获取连接超时时间 -->	        
+	        <property name="removeAbandonedTimeout" value="${jdbc.removeAbandonedTimeout}"/>
+	        <property name="testWhileIdle" value="${jdbc.testWhileIdle}"/>
+	        <property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}"/>
+	        <property name="numTestsPerEvictionRun" value="${jdbc.numTestsPerEvictionRun}"/>
+	        <property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}"/>
+	    </bean>
+
+		<!-- 3.配置SqlSessionFactory对象 -->
+		<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+			<!-- 注入数据库连接池 -->
+			<property name="dataSource" ref="sqlServerDataSource"></property>
+			<!-- 配置mybatis全局配置文件：mybatis-config.xml -->
+			<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+			<!-- 扫描entity包，使用别名 -->
+			<property name="typeAliasesPackage" value="com.amd.entity"></property>
+			<!-- 扫描sql配置文件：mapper需要的xml文件 -->
+			<property name="mapperLocations" value="classpath:mapper/*.xml"></property>
+		</bean>	
+	
+		<!-- 4.配置扫描Dao接口Mapper包，动态实现Dao接口，并注入spring容器 -->
+		<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+			<!-- 注入sqlSessionFactory -->
+			<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+			<!-- 给出需要扫描的Dao接口包 -->
+			<property name="basePackage" value="com.amd.dao"></property>
+		</bean>
+</beans>
+         

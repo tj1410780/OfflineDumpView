@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <mapper namespace="com.amd.dao.ResultDao">
+    
+    <!-- 目的：为DAO接口方法提供sql语句配置 -->
+    <!--  sql语句后面没有分号 -->
+    <select id="getById" parameterType="long" resultType="Result">
+	    select * 
+	    from DumpViewOffLineDB.dbo.result
+	    where id = #{id}
+    </select>
+    
+    <select id="getByBugcheck" parameterType="String" resultType="Result">
+	    select * 
+	    from DumpViewOffLineDB.dbo.result 
+	    where bugcheck = #{bugcheck}
+	    order by id DESC
+    </select>
+    
+     <select id="getAllBugcheckCount" parameterType="String" resultType="BugcheckCount">
+	    select bugcheck, count(*) as number
+	    from DumpViewOffLineDB.dbo.result
+	    group by bugcheck
+    </select>
+    
+  
+<!--     <select id="getBugcheckCount" parameterType="String" resultType="long">
+	    select count(*)
+	    from DumpViewOffLineDB.dbo.result
+	    where bugcheck = #{bugcheck}
+    </select>  -->   
+    
+    <select id="getLastFifty" resultType="Result">
+	    select top 50 * 
+	    from DumpViewOffLineDB.dbo.result 
+	    order by id DESC
+    </select>
+    
+    <select id="getAll" resultType="Result">
+	    select * 
+	    from DumpViewOffLineDB.dbo.result
+	    order by id DESC
+    </select>    
+
+    <select id="getCount" resultType="long">
+	    select count(*)
+	    from DumpViewOffLineDB.dbo.result
+    </select>    
+             
+</mapper>
