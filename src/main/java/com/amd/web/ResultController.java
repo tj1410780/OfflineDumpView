@@ -33,6 +33,7 @@ public class ResultController {
 		List<BugcheckCount> bugcheckCount = resultService.getBugcheckCountList();
 		model.addAttribute("results", results);
 		model.addAttribute("count", bugcheckCount);
+		System.out.println(results.getClass().toString());
 		return "list";		///WEB-INF/jsp/list.jsp
 	}
 		
@@ -54,11 +55,8 @@ public class ResultController {
 		}
 		Result result = resultService.getById(id);
 		model.addAttribute("result", result);
-		System.out.println("xml :" + result.getInformation());
-		List<ResultInfo> contents = ParseXML.parse(result.getInformation());
-		System.out.println("title: " + contents.get(0).getTitle());
-		System.out.println("information: " + contents.get(0).getInformation());
-		model.addAttribute("contents", contents);
+		List<ResultInfo> list = ParseXML.parse(result.getInformation());
+		model.addAttribute("contents", list);
 		return "detail";		///WEB-INF/jsp/detail.jsp
 	}			
 	

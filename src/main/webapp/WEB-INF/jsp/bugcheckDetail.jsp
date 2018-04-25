@@ -10,8 +10,8 @@
 <meta charset="UTF-8">
 <!--针对移动设备,网站显示宽度等于设备屏幕显示宽度,内容缩放比例为1:1-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>View - Offline Dump View Application</title>
-	<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet" />
+<title>BugCheck - Offline Dump View Application</title>
+	<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -24,10 +24,10 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>ID</th>
+							<th>Id</th>
 							<th>File</th>
 							<th>Upload</th>
-							<th>Summary Analysis</th>
+							<th>Summary</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -52,7 +52,7 @@
 
 	
 		<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-		<script src="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
+		<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 
 
