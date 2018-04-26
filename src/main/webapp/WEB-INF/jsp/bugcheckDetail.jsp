@@ -33,7 +33,7 @@
 					<tbody>
 						<c:forEach var="list" items="${list}">
 							<tr>
-								<td><a href="/OfflineDumpView/result/view/${list.id}">${list.id}</a></td>
+								<td><a href="/OfflineDumpView/Dump/View/${list.id}">${list.id}</a></td>
 								<td>${list.dumpFile}</td>
 								<td>${list.endTime}</td>
 								<td>${list.summary}</td>

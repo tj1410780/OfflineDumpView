@@ -16,15 +16,16 @@ public class ParseXML {
 	
 		List<ResultInfo> list = new ArrayList<ResultInfo>();	  
 		Document document = null;
+		int i = 0;
 		try {
 			document = DocumentHelper.parseText(xml); 
 			Element root = document.getRootElement();     
 		    //System.out.println("root name:" + root.getName());
-			List<Element> elements = root.elements("command");  
+			List<Element> elements = root.elements("command"); 
 			for (Element child : elements) {
 			   String title = child.attributeValue("txt");
 			   String information = child.getText();
-			   ResultInfo resultInfo = new ResultInfo(title, information);
+			   ResultInfo resultInfo = new ResultInfo(i++, title, information);
 			   list.add(resultInfo);
 			}
 		} catch (DocumentException e) {

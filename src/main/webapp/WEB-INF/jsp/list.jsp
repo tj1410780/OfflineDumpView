@@ -37,7 +37,7 @@
 								<tbody>
 									<c:forEach var="bgc" items="${count}">
 										<tr>
-											<td><a href="/OfflineDumpView/result/bugcheck/${bgc.bugcheck}">${bgc.bugcheck}</a></td>
+											<td><a href="/OfflineDumpView/Dump/BugCheck/${bgc.bugcheck}">${bgc.bugcheck}</a></td>
 											<td>${bgc.number}</td>
 										</tr>
 									</c:forEach>
@@ -67,7 +67,7 @@
 								<tbody>
 									<c:forEach var="re" items="${results}">
 										<tr>
-											<td><a href="/OfflineDumpView/result/view/${re.id}">${re.id}</a></td>
+											<td><a href="/OfflineDumpView/Dump/View/${re.id}">${re.id}</a></td>
 											<td>${re.bugcheck}</td>
 											<td>${re.dumpFile}</td>
 											<td>${re.endTime}</td>

@@ -19,25 +19,24 @@ import com.amd.service.ResultService;
 import com.amd.util.ParseXML;
 
 @Controller
-@RequestMapping("/result")
+@RequestMapping("/Dump")
 public class ResultController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Resource
 	private ResultService resultService;
 	
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/List", method = RequestMethod.GET)
 	public String list(Model model) {
 		//list.jsp + model = ModelAndView
 		List<Result> results = resultService.getResultList();
 		List<BugcheckCount> bugcheckCount = resultService.getBugcheckCountList();
 		model.addAttribute("results", results);
 		model.addAttribute("count", bugcheckCount);
-		System.out.println(results.getClass().toString());
 		return "list";		///WEB-INF/jsp/list.jsp
 	}
 		
-	@RequestMapping(value = "/bugcheck/{bugcheck}", method = RequestMethod.GET)
+	@RequestMapping(value = "/BugCheck/{bugcheck}", method = RequestMethod.GET)
 	public String list(@PathVariable("bugcheck") String bugcheck, Model model) {	
 		if (bugcheck.equals("")) {
 			return "redirect:/result/list";
@@ -48,7 +47,7 @@ public class ResultController {
 		return "bugcheckDetail";		///WEB-INF/jsp/bugcheckDetail.jsp
 	}
 		
-	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/View/{id}", method = RequestMethod.GET)
 	public String list(@PathVariable("id") Long id, Model model) {	
 		if (id == null) {
 			return "redirect:/result/list";
@@ -56,7 +55,7 @@ public class ResultController {
 		Result result = resultService.getById(id);
 		model.addAttribute("result", result);
 		List<ResultInfo> list = ParseXML.parse(result.getInformation());
-		model.addAttribute("contents", list);
+		model.addAttribute("contents", list);		
 		return "detail";		///WEB-INF/jsp/detail.jsp
 	}			
 	

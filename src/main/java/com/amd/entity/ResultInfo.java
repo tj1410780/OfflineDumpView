@@ -5,6 +5,9 @@ package com.amd.entity;
  * @date Apr 23, 2018 @time 10:24:37 AM
  */
 public class ResultInfo {
+	
+	private int order;
+	
 	private String title;
 	
 	private String information;
@@ -13,10 +16,19 @@ public class ResultInfo {
 		super();
 	}
 
-	public ResultInfo(String title, String information) {
+	public ResultInfo(int order, String title, String information) {
 		super();
+		this.order = order;
 		this.title = title;
 		this.information = information;
+	}
+
+	public int getOrder() {
+		return order;
+	}
+
+	public void setOrder(int order) {
+		this.order = order;
 	}
 
 	public String getTitle() {
@@ -37,8 +49,7 @@ public class ResultInfo {
 
 	@Override
 	public String toString() {
-		return "ResultInfo [title=" + title + ", information=" + information + "]";
+		return "ResultInfo [order=" + order + ", title=" + title + ", information=" + information + "]";
 	}
-	
 	
 }

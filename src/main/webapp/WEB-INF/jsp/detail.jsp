@@ -108,7 +108,7 @@ ul.nav-tabs.affix {
 					<div class="row">
 						<div class="col-lg-10 col-md-12">
 							<c:forEach var="content" items="${contents}">
-								<h4 id="item_${content.title}">${content.title}</h4>
+								<h4 id="item_${content.order}">${content.title}</h4>
 								<pre>${content.information}</pre>
 							</c:forEach>
 						</div>
@@ -117,7 +117,7 @@ ul.nav-tabs.affix {
 							<ul data-spy="affix" data-offset-top="750"
 								class="nav nav-tabs nav-stacked">
 								<c:forEach var="content" items="${contents}">
-									<li><a href="#item_${content.title}">${content.title}</a>
+									<li><a href="#item_${content.order}">${content.title}</a>
 									</li>
 								</c:forEach>
 							</ul>
