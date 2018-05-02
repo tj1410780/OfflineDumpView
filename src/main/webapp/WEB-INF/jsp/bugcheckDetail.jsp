@@ -15,6 +15,32 @@
 </head>
 
 <body>
+
+	<!-- 页面显示部分 -->
+	<nav class="navbar navbar-default navbar-static-top navbar-inverse"
+		role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header col-md-9 col-md-offset-4">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar"></button>
+				<a class="navbar-brand" href="/OfflineDumpView/Dump/Results">Result
+					List</a>
+			</div>
+			
+		<div class="collapse navbar-collapse col-md-3 col-md-offset-7" id="navbar">
+				<form class="navbar-form navbar-right" method="get" action="/OfflineDumpView/Dump/View">
+					<div class="input-group">
+						<input type="text" name="id" class="form-control" placeholder="Input the ID to view"> 
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="submit">Go</button>
+						</span>
+					</div>
+					<!-- /input-group -->
+				</form>
+			</div>
+		</div>
+	</nav>
 	<div class="container-fuild body-content" style="margin: 25px;">
 		<div class="panel panel-default">
 			<div class="panel-heading">

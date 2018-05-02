@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.amd.entity.BugcheckCount;
 import com.amd.entity.Result;
@@ -26,7 +27,7 @@ public class ResultController {
 	@Resource
 	private ResultService resultService;
 	
-	@RequestMapping(value = "/List", method = RequestMethod.GET)
+	@RequestMapping(value = "/Results", method = RequestMethod.GET)
 	public String list(Model model) {
 		//list.jsp + model = ModelAndView
 		List<Result> results = resultService.getResultList();
@@ -39,7 +40,7 @@ public class ResultController {
 	@RequestMapping(value = "/BugCheck/{bugcheck}", method = RequestMethod.GET)
 	public String list(@PathVariable("bugcheck") String bugcheck, Model model) {	
 		if (bugcheck.equals("")) {
-			return "redirect:/result/list";
+			return "redirect:/Dump/Results";
 		}
 		List<Result> list = resultService.getByBugcheck(bugcheck);
 		model.addAttribute("list", list);
@@ -50,15 +51,32 @@ public class ResultController {
 	@RequestMapping(value = "/View/{id}", method = RequestMethod.GET)
 	public String list(@PathVariable("id") Long id, Model model) {	
 		if (id == null) {
-			return "redirect:/result/list";
+			return "redirect:/Dump/Results";
 		}
 		Result result = resultService.getById(id);
+		if (result == null) {
+			return "redirect:/Dump/Results";
+		}
 		model.addAttribute("result", result);
 		List<ResultInfo> list = ParseXML.parse(result.getInformation());
 		model.addAttribute("contents", list);		
 		return "detail";		///WEB-INF/jsp/detail.jsp
 	}			
 	
+	@RequestMapping(value = "/View", method = RequestMethod.GET)
+	public String search(@RequestParam("id") Long id, Model model) {	
+		if (id == null) {
+			return "redirect:/Dump/Results";
+		}
+		Result result = resultService.getById(id);
+		if (result == null) {
+			return "redirect:/Dump/Results";
+		}
+		model.addAttribute("result", result);
+		List<ResultInfo> list = ParseXML.parse(result.getInformation());
+		model.addAttribute("contents", list);		
+		return "detail";		///WEB-INF/jsp/detail.jsp
+	}		
 }
 
 
